@@ -1,9 +1,21 @@
 # Agregar los imports que estimen necesarios
-
+import os
 
 def cargar_tablero(nombre_archivo: str) -> list:
-    pass
-
+    # No es necesario manejar excepcion de FileNotFound
+    board = []
+    txt = os.path.join('Archivos',f'{nombre_archivo}.txt')
+    with open(txt, 'rt') as f:
+        raw = f.readlines()
+        rows = raw[0].strip().split(',')
+        fila = []
+        for ele in rows[1:]:
+            if len(fila) < int(rows[0]):
+                fila.append(ele)
+            if len(fila) == int(rows[0]):
+                board.append(fila)
+                fila = []
+        return board
 
 def guardar_tablero(nombre_archivo: str, tablero: list) -> None:
     pass
@@ -20,6 +32,8 @@ def verificar_alcance_bomba(tablero: list, coordenada: tuple) -> int:
 def verificar_tortugas(tablero: list) -> int:
     pass
 
+def validar_tablero(tablero: list) -> bool:
+    pass
 
 def solucionar_tablero(tablero: list) -> list:
     pass
